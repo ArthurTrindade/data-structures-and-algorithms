@@ -16,11 +16,11 @@ slist_t* slist_init();
 void slist_init2(slist_t *slist);
 snode_t* create_node(int data);
 void slist_free(slist_t *slist);
+void slist_free2(slist_t *slist);
 int slist_insert_next(slist_t *slist, snode_t *snode, int data);
 int slist_insert_next2(slist_t *slist, snode_t *snode, int data);
 int slist_insert_begin(slist_t *slist, int data);
 int slist_insert_end(slist_t *slist, int data);
 int slist_insert_end2(slist_t *slist, int data);
-
 
 #endif

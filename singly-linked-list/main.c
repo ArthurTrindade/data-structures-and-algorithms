@@ -23,7 +23,7 @@ int main() {
 
     print_list(&slist);
 
-    slist_free(&slist);
+    slist_free2(&slist);
 
     return 0;
 }
