@@ -70,8 +70,6 @@ void slist_free2(slist_t *slist) {
         aux = aux->next;
         free(temp);
     }
-
-    free(slist);
 }
 
 int slist_insert_next(slist_t *slist, snode_t *snode, int data) {
