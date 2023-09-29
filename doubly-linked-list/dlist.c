@@ -5,7 +5,6 @@
 dlist_t* 
 dlist_init() {
     dlist_t *dlist = NULL;
-
     dlist = (dlist_t*) malloc(sizeof(dlist_t));
 
     if (dlist != NULL) {
@@ -42,7 +41,7 @@ dnode_t* dnode_create(int data) {
 
     dnode = (dnode_t*) malloc(sizeof(dnode_t));
 
-    if (dnode!= NULL) {
+    if (dnode != NULL) {
         dnode->data = data;
         dnode->next = NULL;
         dnode->prev = NULL;
