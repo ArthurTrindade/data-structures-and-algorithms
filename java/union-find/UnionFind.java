@@ -13,13 +13,14 @@ public class UnionFind<T> {
         }
     }
 
-    public void makeSet(T data) throws Exception {
+    public void makeSet(T data) {
         var newSet = new LinkedList<T>();
 
         var temp = find(data);
 
         if (temp != null) {
-            throw new Exception("Elemento já existe.");
+            System.out.println("Elemento já existe.");
+            return;
         }
 
         newSet.push(data);
@@ -32,16 +33,21 @@ public class UnionFind<T> {
         }
     }
 
-    public void destroySet(T data) throws Exception {
+    public void destroySet(T data) {
         var set = find(data);
 
         if (set == null) {
-            throw new Exception("Elemento não existe.");
+            System.out.println("Elemento não existe.");
+            return;
         }
 
         sets.set(sets.indexOf(set), new LinkedList<T>());
     }
 
+    public void destroySet(int index) {
+        sets.set(index, new LinkedList<T>());
+    }
+    
     public LinkedList<T> find(T data) {
         for (var s : sets) {
             var temp = s.getHead();
@@ -55,12 +61,12 @@ public class UnionFind<T> {
         return null;
     }
 
-    public void union(T data1, T data2) throws Exception {
+    public void union(T data1, T data2) {
         var set1 = find(data1);
         var set2 = find(data2);
 
         if (set1 == null || set2 == null) {
-            throw new Exception("Um dos elementos não existe.");
+            System.out.println("Um dos elementos não existe.");
         }
 
         set1.merge(set2);
