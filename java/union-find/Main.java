@@ -1,28 +1,34 @@
 public class Main {
     public static void main(String[] args) throws Exception {
-        var uf = new UnionFind<Double>();
 
-        uf.makeSet(1.0);
-        uf.makeSet(2.0);
-        uf.makeSet(4.0);
-        uf.makeSet(5.0);
-        uf.makeSet(10.0);
-
-        uf.union(4.0, 10.0);
-        uf.union(1.0, 4.0);
+        UnionFind<Double> unionFind = new UnionFind<>();
+        unionFind.makeSet(1.0);
+        unionFind.makeSet(2.0);
+        unionFind.makeSet(3.0);
         
-        uf.makeSet(3.0);
-        uf.makeSet(6.0);
+        showSet(unionFind, 2.0);
+        showSet(unionFind, 2);
+    }
 
-        uf.union(2.0,5.0);
-        uf.union(3.0,10.0);
+    public static void showSet(UnionFind<Double> uf, Double data) {
+        var set = uf.find(data);
+        int index = uf.getSets().indexOf(set);
+        System.out.print("S_" + index + ": ");
+        printList(uf.find(data));
+    }
 
-        uf.destroySet(6.0);
+    public static void showSet(UnionFind<Double> uf, int index) {
+        System.out.print("S_" + index + ": ");
+        printList(uf.getSets().get(index));
+    }
 
-        uf.makeSet(1.0);
-
-        uf.printUnion();
-
-        System.out.println(uf.getSize());
+    public static void printList(LinkedList<Double> list) {
+        var temp = list.getHead();
+        System.out.print("{ ");
+        while (temp != null) {
+            System.out.print(temp.getData() + ", ");
+            temp = temp.getNext();
+        }
+        System.out.println("}");
     }
 }

@@ -49,21 +49,6 @@ public class LinkedList<T> {
         size++;
     }
 
-    public void printList() {
-        if (head == null) {
-            System.out.println("Lista está vazia.");
-            return;
-        }
-
-        Node<T> temp = head;
-        System.out.print("{ ");
-        while (temp != null) {
-            System.out.print(temp.getData() + ", ");
-            temp = temp.getNext();
-        }
-        System.out.println("} ");
-    }
-
     public void merge(LinkedList<T> list) {
         if (head == null) {
             head = list.getHead();

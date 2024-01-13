@@ -14,7 +14,7 @@ public class UnionFind<T> {
     }
 
     public void makeSet(T data) throws Exception {
-        LinkedList<T> newSet = new LinkedList<>();
+        var newSet = new LinkedList<T>();
 
         var temp = find(data);
 
@@ -32,12 +32,11 @@ public class UnionFind<T> {
         }
     }
 
-    public void destroySet(T data) {
+    public void destroySet(T data) throws Exception {
         var set = find(data);
 
         if (set == null) {
-            System.out.println("Elemento não existe.");
-            return;
+            throw new Exception("Elemento não existe.");
         }
 
         sets.set(sets.indexOf(set), new LinkedList<T>());
@@ -56,26 +55,16 @@ public class UnionFind<T> {
         return null;
     }
 
-    public void union(T data1, T data2) {
+    public void union(T data1, T data2) throws Exception {
         var set1 = find(data1);
         var set2 = find(data2);
 
         if (set1 == null || set2 == null) {
-            System.out.println("Um dos elementos não existe.");
-            return;
+            throw new Exception("Um dos elementos não existe.");
         }
 
         set1.merge(set2);
         sets.set(sets.indexOf(set2), new LinkedList<T>());
-    }
-
-    public void printUnion() {
-        for (var s : sets) {
-            if (s == null) {
-                continue;
-            }
-            s.printList();
-        }
     }
 
     public int getSize() {
