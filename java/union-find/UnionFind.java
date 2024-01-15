@@ -19,7 +19,7 @@ public class UnionFind<T> {
         var temp = find(data);
 
         if (temp != null) {
-            System.out.println("Elemento já existe.");
+            System.out.println("\n\033[0;31mElemento já existe.\033[0m");
             return;
         }
 
@@ -37,7 +37,7 @@ public class UnionFind<T> {
         var set = find(data);
 
         if (set == null) {
-            System.out.println("Elemento não existe.");
+            System.out.println("\n\033[0;31mElemento não existe.\033[0m");
             return;
         }
 
@@ -62,11 +62,18 @@ public class UnionFind<T> {
     }
 
     public void union(T data1, T data2) {
+
+        if (data1.equals(data2)) {
+            System.out.println("\n\033[0;31mOs elementos já estão no mesmo conjunto.\033[0m");
+            return;
+        }
+
         var set1 = find(data1);
         var set2 = find(data2);
 
         if (set1 == null || set2 == null) {
-            System.out.println("Um dos elementos não existe.");
+            System.out.println("\n\033[0;31mUm dos elementos não existe.\033[0m");
+            return;
         }
 
         set1.merge(set2);
