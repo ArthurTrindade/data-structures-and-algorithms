@@ -5,7 +5,7 @@ CC = gcc
 CFLAGS = -Wall -g
 
 # Arquivo de origem
-SOURCE = main.c dlist.c
+SOURCE = main.c list.c
 
 # Nome do executável
 TARGET = main

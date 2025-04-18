@@ -1,4 +1,4 @@
-#include "dlist.h"
+#include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,12 +22,12 @@ void print_symbol(symbol_t *s) {
   printf("Type: %d\nLexeme: %s\n", s->type, s->lexeme);
 }
 
-symbol_t *get_symbol(dlist_t *list, char *lexeme) {
+symbol_t *get_symbol(list_t *list, char *lexeme) {
   symbol_t *s;
-  dnode_t *aux = dlist_head(list);
+  node_t *aux = list_head(list);
 
-  for (int i = 0; i <= dlist_size(list); i++) {
-    s = dlist_data(aux);
+  for (int i = 0; i <= list_size(list); i++) {
+    s = list_data(aux);
 
     if (strcmp(s->lexeme, lexeme) == 0) {
       return s;
@@ -41,29 +41,29 @@ symbol_t *get_symbol(dlist_t *list, char *lexeme) {
 
 int main() {
 
-  dlist_t list;
-  dlist_init(&list, free);
+  list_t list;
+  list_init(&list, free);
 
   symbol_t *s1 = new_symbol(1, "x");
   symbol_t *s2 = new_symbol(1, "y");
 
-  printf("List size: %d\n", dlist_size(&list));
+  printf("List size: %d\n", list_size(&list));
 
-  dlist_insert_begin(&list, s1);
+  list_insert_begin(&list, s1);
 
-  printf("List size: %d\n", dlist_size(&list));
+  printf("List size: %d\n", list_size(&list));
 
-  dlist_insert_begin(&list, s2);
+  list_insert_begin(&list, s2);
 
-  printf("List size: %d\n", dlist_size(&list));
+  printf("List size: %d\n", list_size(&list));
 
-  /* dlist_remove(&list, list.head); */
+  /* list_remove(&list, list.head); */
 
-  /* printf("List size: %d\n", dlist_size(&list)); */
+  /* printf("List size: %d\n", list_size(&list)); */
 
-  print_symbol(dlist_data(list.head));
+  print_symbol(list_data(list.head));
 
-  print_symbol(dlist_data(list.head->next));
+  print_symbol(list_data(list.head->next));
 
   printf("\n");
 
@@ -71,9 +71,9 @@ int main() {
 
   print_symbol(s3);
 
-  dlist_destroy(&list);
+  list_destroy(&list);
 
-  printf("List size: %d\n", dlist_size(&list));
+  printf("List size: %d\n", list_size(&list));
 
   return 0;
 }

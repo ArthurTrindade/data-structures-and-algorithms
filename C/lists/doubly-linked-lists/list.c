@@ -1,8 +1,8 @@
-#include "dlist.h"
+#include "list.h"
 #include <stdlib.h>
 #include <string.h>
 
-void dlist_init(dlist_t *list, void (*destroy)(void *)) {
+void list_init(list_t *list, void (*destroy)(void *)) {
   list->size = 0;
   list->destroy = destroy;
   list->head = NULL;
@@ -11,40 +11,33 @@ void dlist_init(dlist_t *list, void (*destroy)(void *)) {
   return;
 }
 
-void dlist_destroy(dlist_t *list) {
+void list_destroy(list_t *list) {
   /* void *data; */
-  dnode_t *aux = dlist_head(list);
+  node_t *aux = list_head(list);
 
-  while (dlist_size(list) > 0) {
-    if (dlist_remove(list, aux) == 0) {
+  while (list_size(list) > 0) {
+    if (list_remove(list, aux) == 0) {
       aux = aux->next;
     }
   }
 
-  /* while (dlist_size(list) > 0) { */
-  /*   if (dlist_remove(list, dlist_tail(list)) == 0 && list->destroy != NULL) {
-   */
-  /*     list->destroy(data); */
-  /*   } */
-  /* } */
-
-  memset(list, 0, sizeof(dlist_t));
+  memset(list, 0, sizeof(list_t));
 
   return;
 }
 
-int dlist_insert_next(dlist_t *list, dnode_t *element, const void *data) {
-  dnode_t *new_element;
+int list_insert_next(list_t *list, node_t *element, const void *data) {
+  node_t *new_element;
 
-  if (element == NULL && dlist_size(list) != 0)
+  if (element == NULL && list_size(list) != 0)
     return -1;
 
-  if ((new_element = (dnode_t *)malloc(sizeof(dnode_t))) == NULL)
+  if ((new_element = (node_t *)malloc(sizeof(node_t))) == NULL)
     return -1;
 
   new_element->data = (void *)data;
 
-  if (dlist_size(list) == 0) {
+  if (list_size(list) == 0) {
     list->head = new_element;
     list->head->prev = NULL;
     list->head->next = NULL;
@@ -67,18 +60,18 @@ int dlist_insert_next(dlist_t *list, dnode_t *element, const void *data) {
   return 0;
 }
 
-int dlist_insert_prev(dlist_t *list, dnode_t *element, const void *data) {
-  dnode_t *new_element;
+int list_insert_prev(list_t *list, node_t *element, const void *data) {
+  node_t *new_element;
 
-  if (element == NULL && dlist_size(list) != 0)
+  if (element == NULL && list_size(list) != 0)
     return -1;
 
-  if ((new_element = (dnode_t *)malloc(sizeof(dnode_t))) == NULL)
+  if ((new_element = (node_t *)malloc(sizeof(node_t))) == NULL)
     return -1;
 
   new_element->data = (void *)data;
 
-  if (dlist_size(list) == 0) {
+  if (list_size(list) == 0) {
     list->head = new_element;
     list->head->prev = NULL;
     list->head->next = NULL;
@@ -101,9 +94,9 @@ int dlist_insert_prev(dlist_t *list, dnode_t *element, const void *data) {
   return 0;
 }
 
-int dlist_remove(dlist_t *list, dnode_t *element) {
+int list_remove(list_t *list, node_t *element) {
 
-  if (element == NULL || dlist_size(list) == 0)
+  if (element == NULL || list_size(list) == 0)
     return -1;
 
   void *data = element->data;
@@ -132,14 +125,14 @@ int dlist_remove(dlist_t *list, dnode_t *element) {
   return 0;
 }
 
-int dlist_insert_begin(dlist_t *list, void *data) {
-  return dlist_insert_prev(list, list->head, data);
+int list_insert_begin(list_t *list, void *data) {
+  return list_insert_prev(list, list->head, data);
 }
 
-int dlist_insert_end(dlist_t *list, void *data) {
-  return dlist_insert_next(list, list->tail, data);
+int list_insert_end(list_t *list, void *data) {
+  return list_insert_next(list, list->tail, data);
 }
 
-int dlist_remove_begin(dlist_t *list) { return dlist_remove(list, list->head); }
+int list_remove_begin(list_t *list) { return list_remove(list, list->head); }
 
-int dlist_remove_last(dlist_t *list) { return dlist_remove(list, list->tail); }
+int list_remove_last(list_t *list) { return list_remove(list, list->tail); }
